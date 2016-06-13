@@ -6,7 +6,8 @@
     <img src="../assets/game-icon.png"></img>
   </div>
   
-  <form ng-submit="ctrlSignIn()">
+  <!-- <form ng-submit="ctrlSignIn()"> -->
+  <form>
     <div>
       <span>Race:</span>
       <input type="text" name="racename" ng-model="racename" class="inputBox" placeholder="race name"/>
@@ -16,8 +17,18 @@
       <input type="text" name="username" ng-model="username" class="inputBox" placeholder="username"/>
     </div>
     <div>
-      <input type="submit" name="submit" value="Join Race" class="submitButton"/>
+      <span>Password:</span>
+      <input type="password" name="password" ng-model="password" class="inputBox" placeholder="password"/>
     </div>
+    <button ng-click="ctrlSignIn()">Login</button>
+    <button ng-click="signup()">Register</button>
+    <button ng-click="logout()" ng-show="isAuthed()">Logout</button>
+    <!-- <div>
+      <input type="submit" name="submit" value="Login" class="submitButton"/>
+    </div>
+    <div>
+      <input type="submit" name="submit" value="Register" class="submitButton"/>
+    </div> -->
     
   </form>
 </div>

@@ -171,7 +171,12 @@ var generateRacerMoves = function(time, racers) {
 
 // get users
 app.get('/leaderboard', function(req, res) {
-    userController.fetchAll(function(restaurants) {
-      res.status(200).json(restaurants);
-    });
+  userController.fetchAll(function(restaurants) {
+    res.status(200).json(restaurants);
   });
+});
+
+app.post('/api/users/signin', userController.signin);
+app.post('/api/users/signup', userController.signup);
+//i don't think this route wille ever get used -KN
+app.get('/api/users/signedin', userController.checkAuth);
