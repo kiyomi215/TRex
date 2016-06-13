@@ -178,5 +178,5 @@ app.get('/leaderboard', function(req, res) {
 
 app.post('/api/users/signin', userController.signin);
 app.post('/api/users/signup', userController.signup);
-//i don't think this route wille ever get used -KN
+//i don't think this route will ever get used -KN
 app.get('/api/users/signedin', userController.checkAuth);

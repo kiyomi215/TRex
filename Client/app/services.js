@@ -5,13 +5,14 @@ angular.module('app.services', [])
     var signin = function (user) {
       //need to define routes in server.js
       return $http({
-      method: 'POST',
-      url: '/api/users/signin',
-      data: user
-    })
-    .then(function (resp) {
-      return resp.data.token;
-    })
+        method: 'POST',
+        url: '/api/users/signin',
+        data: user
+      })
+      .then(function (resp) {
+        console.log('token', resp.data.token);
+        return resp.data.token;
+      })
     };
 
     var signup = function (user) {

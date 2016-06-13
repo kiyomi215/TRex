@@ -1,11 +1,11 @@
 angular.module('app.auth', ['app.services'])
 
   //Auth controller is responsible for our client-side authentication
-  // in our signup/signin forms using the injecte Auth service -KN
+  // in our signup/signin forms using the injected Auth service. com.stegorex
+  //is where the JWT is going to be stored -KN
   .controller('AuthController', function ($scope, $location, $window, Auth) {
     $scope.user = {};
     $scope.username = '';
-
     $scope.racename = '';
 
     $scope.ctrlSignIn = function () {
@@ -13,10 +13,13 @@ angular.module('app.auth', ['app.services'])
         .then(function (token) {
           $window.localStorage.setItem('com.stegorex', token);
           // Upon submit of the signin form redirect to raceView using the racename and username
-          $location.path('/raceView'+ scope.racename + '/' + $scope.username);
+    
+          $location.path('/raceView'+ '/' + $scope.racename + '/' + $scope.user.username);
+          console.log($location.path());
         })
         .catch(function (error) {
-          console.error(error);
+          window.alert('Incorrect password. Please try again.');
+          console.log('there was an error', error);
         });
     };
 
@@ -24,10 +27,11 @@ angular.module('app.auth', ['app.services'])
       Auth.signup($scope.user)
         .then(function (token) {
           $window.localStorage.setItem('com.stegorex', token);
-          $location.path('/raceView'+ scope.racename + '/' + $scope.username);
+          $location.path('/raceView'+ '/' + $scope.racename + '/' + $scope.user.username);
         })
         .catch(function (error) {
-          console.error(error);
+          window.alert('That user is already registered. Please login or create a new account.')
+          console.log('there was an error', error);
         });
     };
 

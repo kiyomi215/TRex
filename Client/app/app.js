@@ -37,7 +37,7 @@ angular.module("app", [
   // adds token to the header so the server can validate the request
   var attach = {
     request: function (object) {
-      var jwt = $window.localStorage.getItem('com.shortly');
+      var jwt = $window.localStorage.getItem('com.stegorex');
       if (jwt) {
         object.headers['x-access-token'] = jwt;
       }

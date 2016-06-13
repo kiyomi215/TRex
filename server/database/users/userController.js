@@ -14,33 +14,34 @@ module.exports = {
     findUser({username: username})
       .then(function (user) {
         if(!user) {
-          next(new Error('User does not exist'));
+          res.sendStatus(400);
         } else {
           return user.comparePasswords(password)
             .then(function (foundUser) {
+              console.log('found', foundUser);
               if(foundUser){
                 var token = jwt.encode(user, 'secret');
                 res.json({token: token});
               } else {
-                return next(new Error('no user'));
+                res.sendStatus(400);
               }
             });
         }
       })
-      .fail(function(error) {
-        next(error);
+      .catch(function(error) {
+        console.log(error);
       });
   },
 
   signup: function(req, res, next) {
+    console.log(req.body);
     var username = req.body.username;
     var password = req.body.password;
-
     //check to see if user already exists
     findUser({username: username})
       .then(function (user) {
         if (user) {
-          next(new Error('User already exists!'));
+          res.sendStatus(400);
         } else {
           //make a new user if it doesn't already exist
           return createUser({
@@ -54,8 +55,10 @@ module.exports = {
         var token = jwt.encode(user, 'secret');
         res.json({token: token});
       })
-      .fail(function (error) {
-        next(error);
+      .catch(function (error) {
+        console.log(error);
+        res.sendStatus(500);
+
       });
   },
 

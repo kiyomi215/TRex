@@ -27,6 +27,20 @@ var UserSchema = mongoose.Schema({
 	}
 });
 
+UserSchema.methods.comparePasswords = function (candidatePassword) {
+  var savedPassword = this.password;
+  return Q.Promise(function (resolve, reject) {
+    bcrypt.compare(candidatePassword, savedPassword, function (err, isMatch) {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(isMatch);
+        resolve(isMatch);
+      }
+    });
+  });
+};
+
 UserSchema.pre('save', function (next) {
   var user = this;
 
