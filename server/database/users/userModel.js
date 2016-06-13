@@ -13,7 +13,6 @@ var UserSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	salt: String,
 	wins: {
 		type: Number,
 		default: 0
